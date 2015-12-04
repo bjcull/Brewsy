@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0-*",
+  "description": "Brewsy.Domain Class Library",
+  "authors": [ "Ben" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": { }
+  },
+  "dependencies": {
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+  }
+}

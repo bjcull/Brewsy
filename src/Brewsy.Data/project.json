@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0-*",
+  "description": "Brewsy.Data Class Library",
+  "authors": [ "Ben" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": { }
+  },
+  "dependencies": {
+    "Brewsy.Domain": "1.0.0-*",
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "Stripe.net": "5.1.2"
+  },
+  "commands": {
+    "ef": "EntityFramework.Commands"
+  }
+}

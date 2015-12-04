@@ -1,0 +1,70 @@
+﻿@model Brewsy.Web.ViewModels.Sell.HomeIndexVm
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Like Etsy, but beer!</h1>
+        <p>Buy and Sell your homebrewed beer. Each package comes with a 6-pack of beer and a recipe so you can brew it yourself!</p>
+        <p><a class="btn btn-primary btn-lg" href="@Url.Action("Register", "Account")" role="button">Become a seller</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail-beer">
+                <img src="~/images/abt12_square.jpg" class="img-responsive" />
+                <h4>St. Bernardus Abt 12</h4>
+                <p>An excellent brew from the world famous Watou region of Belgium.</p>
+                <p>
+                    <form action="@Url.Action("Index", "Charge")" method="POST">
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="pk_test_zahvvbj8XgBhicBG6j1fjdhc"
+                                data-image="/images/abt12_square.jpg"
+                                data-name="Brewsy"
+                                data-description="St Bernardus Abt 12"
+                                data-currency="aud"
+                                data-amount="500"
+                                data-label="Buy Now for $5.00"
+                                data-locale="auto">
+
+
+
+                        </script>
+                    </form>
+                    @*<a class="btn btn-primary btn-block" href="#" role="button">Buy Now $24.99</a>*@
+                </p>
+            </div>
+        </div>
+
+        @foreach (var beer in Model.Beers)
+        {
+            <div class="col-md-3">
+                <div class="thumbnail-beer">
+                    <img src="@beer.ImageUrl" class="img-responsive"/>
+                    <h4>@beer.Name</h4>
+                    <p>@beer.Description</p>
+                    <p>
+                        <form action="@Url.Action("Index", "Charge")" method="POST">
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="@beer.User.StripePublishableKey"
+                                    data-image="@beer.ImageUrl"
+                                    data-name="Brewsy"
+                                    data-description="@beer.Name"
+                                    data-currency="aud"
+                                    data-amount="@(beer.Price * 100)"
+                                    data-label="Buy Now for @beer.Price.ToString("C")"
+                                    data-locale="auto">
+                            </script>
+                        </form>
+                        @*<a class="btn btn-primary btn-block" href="#" role="button">Buy Now $24.99</a>*@
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div> <!-- /container -->

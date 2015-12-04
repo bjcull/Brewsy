@@ -1,0 +1,22 @@
+﻿@model Brewsy.Web.ViewModels.Sell.SellIndexVm
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (!Model.HasStripeAccount)
+{
+    <div class="container">
+        <h2>Sell</h2>
+        <p>To sell beers on Brewsy you need a Stripe account. Click the link below to get started.</p>
+        <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_7T6H6dr9lNLgPqoXxSkW99M3s55f8IEZ&scope=read_write" class="btn btn-primary">Connect to Stripe</a>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h2>Sell</h2>
+        <p>Connected</p>
+    </div>
+}
