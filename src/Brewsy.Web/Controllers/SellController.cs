@@ -23,20 +23,6 @@ namespace Brewsy.Web.Controllers
             _brewsyContext = brewsyContext;
         }
 
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            var model = new SellIndexVm();
-            var user = _brewsyContext.Users.FirstOrDefault(x => x.Id == User.GetUserId());
-
-            if (!string.IsNullOrEmpty(user.StripeUserId))
-            {
-                model.HasStripeAccount = true;
-            }
-
-            return View(model);
-        }
-
         public IActionResult StripeCallback(string code)
         {
             var service = new StripeOAuthTokenService("sk_test_FYvhtg9S58z86Idcktw6JhAg");
@@ -56,7 +42,7 @@ namespace Brewsy.Web.Controllers
 
             _brewsyContext.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Beers");
         }
     }
 }

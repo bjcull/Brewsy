@@ -9,6 +9,6 @@ namespace Brewsy.Domain.Services
 {
     public interface IChargeService
     {
-        Purchase Charge(CheckoutForm form);
+        Purchase Charge(CheckoutForm form, Beer beer);
     }
 }

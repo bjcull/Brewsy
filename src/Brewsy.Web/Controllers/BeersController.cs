@@ -6,9 +6,11 @@ using Microsoft.Data.Entity;
 using Brewsy.Data;
 using Brewsy.Domain.Entities;
 using Brewsy.Web.ViewModels.Sell;
+using Microsoft.AspNet.Authorization;
 
 namespace Brewsy.Web.Controllers
 {
+    [Authorize]
     public class BeersController : Controller
     {
         private BrewsyContext _context;
@@ -53,7 +55,6 @@ namespace Brewsy.Web.Controllers
         // GET: Beers/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "User");
             return View();
         }
 
@@ -62,13 +63,15 @@ namespace Brewsy.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Beer beer)
         {
+            beer.UserId = User.GetUserId();
+
             if (ModelState.IsValid)
             {
                 _context.Beers.Add(beer);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "User", beer.UserId);
+
             return View(beer);
         }
 
@@ -85,7 +88,7 @@ namespace Brewsy.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "User", beer.UserId);
+
             return View(beer);
         }
 
@@ -100,7 +103,7 @@ namespace Brewsy.Web.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "User", beer.UserId);
+
             return View(beer);
         }
 

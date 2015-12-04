@@ -18,11 +18,12 @@ namespace Brewsy.Data.Services
             _brewsyContext = brewsyContext;
         }
 
-        public Purchase Charge(CheckoutForm form)
+        public Purchase Charge(CheckoutForm form, Beer beer)
         {
             var charge = new StripeChargeCreateOptions()
             {
-                Amount = 500,
+                Amount = Convert.ToInt32(beer.Price * 100),
+                ApplicationFee = Convert.ToInt32((beer.Price * 0.05M) * 100),
                 Currency = "AUD",
                 Source = new StripeSourceOptions()
                 {
@@ -30,7 +31,7 @@ namespace Brewsy.Data.Services
                 }
             };
 
-            var service = new StripeChargeService("sk_test_FJq6QAbYWPWzWIbEvnr5IWyl");
+            var service = new StripeChargeService(beer.User.StripeAccessToken);
             var result = service.Create(charge);
 
             if (!result.Paid)

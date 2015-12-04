@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Brewsy.Data;
 using Brewsy.Web.ViewModels.Sell;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 
 namespace Brewsy.Web.Controllers
 {
@@ -21,7 +22,7 @@ namespace Brewsy.Web.Controllers
         {
             var model = new HomeIndexVm();
 
-            model.Beers = _context.Beers.ToList();
+            model.Beers = _context.Beers.Include(x => x.User).Where(x => x.User != null).ToList();
 
             return View(model);
         }

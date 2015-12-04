@@ -50,15 +50,17 @@
                     <p>@beer.Description</p>
                     <p>
                         <form action="@Url.Action("Index", "Charge")" method="POST">
+                            <input type="hidden" name="BeerId" value="@beer.Id" />
                             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="@beer.User.StripePublishableKey"
                                     data-image="@beer.ImageUrl"
                                     data-name="Brewsy"
                                     data-description="@beer.Name"
                                     data-currency="aud"
-                                    data-amount="@(beer.Price * 100)"
+                                    data-amount="@(beer.Price*100)"
                                     data-label="Buy Now for @beer.Price.ToString("C")"
                                     data-locale="auto">
+                            
                             </script>
                         </form>
                         @*<a class="btn btn-primary btn-block" href="#" role="button">Buy Now $24.99</a>*@

@@ -4,5 +4,6 @@
     {
         public string StripeToken { get; set; }
         public string StripeEmail { get; set; }
+        public int BeerId { get; set; }
     }
 }
